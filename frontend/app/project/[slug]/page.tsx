@@ -27,7 +27,7 @@ const formSchema = z.object({
         }, "Amount must be a positive number"),
 });
 
-export default function ProjectPage() {
+export default function ProjectPage() {   
     const [isBackingExpanded, setIsBackingExpanded] = useState(false);
     const [isTokenDropdownOpen, setIsTokenDropdownOpen] = useState(false);
 
@@ -321,6 +321,34 @@ updates throughout the development process.
                             </div>
                         </Card>
 
+                        {/* Awards */}
+                        {nfts.length > 0 && (
+                            <Card className="p-6">
+                                <h2 className="text-xl font-semibold mb-4">Awards</h2>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    {nfts.map((nft) => (
+                                        <Link
+                                            key={nft.id}
+                                            href={`/project/${nft.id}`}
+                                            className="hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+                                        >
+                                            <Card key={nft.id} className="overflow-hidden bg-zinc-800">
+                                                <div className="aspect-square relative">
+                                                    <Image src={nft.image || "/placeholder.svg"} alt={nft.name} fill className="object-cover" />
+                                                </div>
+                                                <CardContent className="p-3">
+                                                    <h3 className="font-medium text-sm mb-1 truncate">{nft.name}</h3>
+                                                    <Badge variant="outline" className="text-green-500 border-green-500">
+                                                        Verifed
+                                                    </Badge>
+                                                </CardContent>
+                                            </Card>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </Card>
+                        )}
+
                         {/* Project Description */}
                         <Card className="p-6">
                             <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -338,130 +366,6 @@ updates throughout the development process.
                                 >
                                     {defaultDescription}
                                 </ReactMarkdown>
-                            </div>
-                        </Card>
-
-                        {/* Associated NFTs */}
-                        <Card className="p-6">
-                            <h2 className="text-xl font-semibold mb-4">Associated NFTs</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                {nfts.map((nft) => (
-                                    <Link
-                                        key={nft.id}
-                                        href={`/project/${nft.id}`}
-                                        className="hover:scale-[1.02] transition-all duration-300 cursor-pointer"
-                                    >
-                                        <Card key={nft.id} className="overflow-hidden bg-zinc-800">
-                                            <div className="aspect-square relative">
-                                                <Image src={nft.image || "/placeholder.svg"} alt={nft.name} fill className="object-cover" />
-                                            </div>
-                                            <CardContent className="p-3">
-                                                <h3 className="font-medium text-sm mb-1 truncate">{nft.name}</h3>
-                                                <Badge variant="outline" className="text-green-500 border-green-500">
-                                                    Verifed
-                                                </Badge>
-                                            </CardContent>
-                                        </Card>
-                                    </Link>
-                                ))}
-                            </div>
-                        </Card>
-
-                        {/* Team Section */}
-                        <Card className="p-6">
-                            <h2 className="text-xl font-semibold mb-4">Meet the Team</h2>
-                            <p className="text-muted-foreground mb-6">
-                                Our diverse team brings together expertise from gaming, blockchain, and design to create an exceptional
-                                experience.
-                            </p>
-
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div className="flex items-start gap-4">
-                                    <Avatar className="h-16 w-16">
-                                        <AvatarImage src="/placeholder.svg?height=64&width=64&query=male game developer portrait" />
-                                        <AvatarFallback>JD</AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold">John Doe</h3>
-                                        <p className="text-sm text-muted-foreground mb-2">Lead Game Developer</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Former senior developer at Epic Games with 8+ years experience in Unreal Engine and multiplayer
-                                            systems.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <Avatar className="h-16 w-16">
-                                        <AvatarImage src="/placeholder.svg?height=64&width=64&query=female blockchain engineer portrait" />
-                                        <AvatarFallback>SA</AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold">Sarah Anderson</h3>
-                                        <p className="text-sm text-muted-foreground mb-2">Blockchain Engineer</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Smart contract specialist with expertise in Ethereum and Polygon. Previously worked at ConsenSys.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <Avatar className="h-16 w-16">
-                                        <AvatarImage src="/placeholder.svg?height=64&width=64&query=male creative director portrait" />
-                                        <AvatarFallback>MR</AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold">Mike Rodriguez</h3>
-                                        <p className="text-sm text-muted-foreground mb-2">Creative Director</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Award-winning artist and designer with experience at Blizzard Entertainment and Riot Games.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <Avatar className="h-16 w-16">
-                                        <AvatarImage src="/placeholder.svg?height=64&width=64&query=female product manager portrait" />
-                                        <AvatarFallback>EL</AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold">Emily Liu</h3>
-                                        <p className="text-sm text-muted-foreground mb-2">Product Manager</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Former PM at Meta with expertise in virtual worlds and user experience design for gaming
-                                            platforms.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <Avatar className="h-16 w-16">
-                                        <AvatarImage src="/placeholder.svg?height=64&width=64&query=male marketing director portrait" />
-                                        <AvatarFallback>DK</AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold">David Kim</h3>
-                                        <p className="text-sm text-muted-foreground mb-2">Marketing Director</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Growth marketing expert with successful launches at major gaming studios and Web3 companies.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <Avatar className="h-16 w-16">
-                                        <AvatarImage src="/placeholder.svg?height=64&width=64&query=female technical lead portrait" />
-                                        <AvatarFallback>AL</AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold">Anna Lopez</h3>
-                                        <p className="text-sm text-muted-foreground mb-2">Technical Lead</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Full-stack engineer specializing in scalable backend systems and real-time multiplayer
-                                            architecture.
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
                         </Card>
                     </div>

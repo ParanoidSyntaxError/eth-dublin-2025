@@ -9,7 +9,7 @@ export function Header() {
                 {/* Logo/Title */}
                 <div className="flex items-center">
                     <Link href="/" className="flex items-center space-x-2">
-                        <span className="text-2xl font-semibold">Hack.Fund</span>
+                        <span className="text-2xl font-semibold">HackFund</span>
                     </Link>
                 </div>
 

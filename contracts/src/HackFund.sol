@@ -29,7 +29,8 @@ contract HackFund is IHackFund, ReentrancyGuard {
         string memory symbol,
         Hack memory hackParams,
         uint256 mintAmount,
-        address mintReceiver
+        address mintReceiver,
+        bytes32 salt
     ) external override returns (address) {
         if (hackParams.expiration <= block.timestamp) {
             revert FundingExpired(hackParams.expiration, block.timestamp);
@@ -41,7 +42,7 @@ contract HackFund is IHackFund, ReentrancyGuard {
             revert MaxSupplyExceeded(TOKEN_MAX_SUPPLY, mintAmount);
         }
 
-        address token = Clones.clone(tokenImplementation);
+        address token = Clones.cloneDeterministic(tokenImplementation, salt);
         _hacks[token] = hackParams;
 
         IERC20Clone(token).initialize(address(this), name, symbol);
@@ -79,7 +80,7 @@ contract HackFund is IHackFund, ReentrancyGuard {
 
         if (newSupply == TOKEN_MAX_SUPPLY) {
             _hacks[token].expiration = 0;
-            
+
             Address.sendValue(
                 payable(hack.receiver),
                 _cost(hack.price, TOKEN_MAX_SUPPLY)
@@ -92,8 +93,8 @@ contract HackFund is IHackFund, ReentrancyGuard {
     }
 
     function refund(
-        address token, 
-        uint256 amount, 
+        address token,
+        uint256 amount,
         address receiver
     ) external override nonReentrant {
         Hack memory hack = _hacks[token];
@@ -107,10 +108,13 @@ contract HackFund is IHackFund, ReentrancyGuard {
 
         IERC20Clone(token).burnFrom(msg.sender, amount);
 
-        Address.sendValue(
-            payable(receiver),
-            _cost(hack.price, amount)
-        );
+        Address.sendValue(payable(receiver), _cost(hack.price, amount));
+    }
+
+    function predictTokenAddress(
+        bytes32 salt
+    ) external view override returns (address) {
+        return Clones.predictDeterministicAddress(tokenImplementation, salt);
     }
 
     function getHack(

@@ -26,12 +26,14 @@ interface IHackFund {
         string memory symbol,
         Hack memory hackParams,
         uint256 mintAmount,
-        address mintReceiver
+        address mintReceiver,
+        bytes32 salt
     ) external returns (address token);
 
     function mint(address token, address to) external payable;
 
     function refund(address token, uint256 amount, address receiver) external;
 
+    function predictTokenAddress(bytes32 salt) external view returns (address);
     function getHack(address token) external view returns (Hack memory);
 }
