@@ -326,14 +326,14 @@ updates throughout the development process.
                             <div className="prose prose-gray dark:prose-invert max-w-none">
                                 <ReactMarkdown
                                     components={{
-                                        h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mb-4" {...props} />,
-                                        h2: ({ node, ...props }) => <h2 className="text-2xl font-semibold mb-3" {...props} />,
-                                        h3: ({ node, ...props }) => <h3 className="text-xl font-semibold mb-2" {...props} />,
-                                        p: ({ node, ...props }) => <p className="text-muted-foreground mb-4" {...props} />,
-                                        ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-4" {...props} />,
-                                        ol: ({ node, ...props }) => <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-4" {...props} />,
-                                        li: ({ node, ...props }) => <li className="text-muted-foreground" {...props} />,
-                                        a: ({ node, ...props }) => <a className="text-primary hover:underline" {...props} />,
+                                        h1: ({ ...props }) => <h1 className="text-3xl font-bold mb-4" {...props} />,
+                                        h2: ({ ...props }) => <h2 className="text-2xl font-semibold mb-3" {...props} />,
+                                        h3: ({ ...props }) => <h3 className="text-xl font-semibold mb-2" {...props} />,
+                                        p: ({ ...props }) => <p className="text-muted-foreground mb-4" {...props} />,
+                                        ul: ({ ...props }) => <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-4" {...props} />,
+                                        ol: ({ ...props }) => <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-4" {...props} />,
+                                        li: ({ ...props }) => <li className="text-muted-foreground" {...props} />,
+                                        a: ({ ...props }) => <a className="text-primary hover:underline" {...props} />,
                                     }}
                                 >
                                     {defaultDescription}

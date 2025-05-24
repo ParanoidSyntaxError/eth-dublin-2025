@@ -4,13 +4,12 @@ pragma solidity ^0.8.28;
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import {Clones} from "@openzeppelin/contracts/proxy/Clones.sol";
-import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Address} from "@openzeppelin/contracts/utils/Address.sol";
 
 import {ERC20Clone, IERC20Clone} from "./token/ERC20Clone.sol";
 import {IHackFund} from "./IHackFund.sol";
 
-contract HackFund is IHackFund, ReentrancyGuard, Ownable {
+contract HackFund is IHackFund, ReentrancyGuard {
     using SafeERC20 for IERC20Clone;
 
     uint256 public constant PRICE_SCALE = 1e18;
@@ -21,7 +20,7 @@ contract HackFund is IHackFund, ReentrancyGuard, Ownable {
 
     mapping(address => Hack) private _hacks;
 
-    constructor(address initialOwner) Ownable(initialOwner) {
+    constructor() {
         tokenImplementation = address(new ERC20Clone());
     }
 
