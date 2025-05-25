@@ -8,31 +8,34 @@ dataSources:
     name: HackFund
     network: base-sepolia
     source:
-      address: "0xDf93B053f90139dC2dFCd9d940587B154CA38c5d"
-      abi: HackFund
-      startBlock: 26193507
+      address: "0x677e546e38A5d1d0711962206549FEf7549A220B"
+      abi: HackFund	
+      startBlock: 26167505
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
       language: wasm/assemblyscript
       entities:
-        - Funded
-        - Mint
-        - NewHack
-        - NewToken
-        - Refund
+        - Hack
       abis:
         - name: HackFund
           file: ./abis/HackFund.json
       eventHandlers:
-        - event: Funded(indexed address)
-          handler: handleFunded
         - event: Mint(indexed address,address,uint256)
           handler: handleMint
-        - event: NewHack(indexed address,uint256,uint256,address,string)
+        - event: NewHack(indexed address)
           handler: handleNewHack
-        - event: NewToken(indexed address,string,string,uint256)
-          handler: handleNewToken
-        - event: Refund(indexed address,address,uint256)
-          handler: handleRefund
       file: ./src/hack-fund.ts
+templates:
+  - name: HackMetadata
+    kind: file/ipfs
+    mapping:
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/hack-fund.ts
+      handler: handleHackMetadata
+      entities:
+        - HackMetadata
+      abis:
+        - name: HackFund
+          file: ./abis/HackFund.json

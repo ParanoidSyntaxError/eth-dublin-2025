@@ -51,7 +51,8 @@ contract HackFund is IHackFund, ReentrancyGuard {
             IERC20Clone(token).mint(mintReceiver, mintAmount);
         }
 
-        emit NewHack(token);
+        emit NewHack(token, hackParams.price, hackParams.expiration, hackParams.receiver, hackParams.metadataUri);
+        emit NewToken(token, name, symbol, mintAmount);
 
         return token;
     }

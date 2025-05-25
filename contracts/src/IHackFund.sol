@@ -9,7 +9,8 @@ interface IHackFund {
     error MaxSupplyExceeded(uint256 maxSupply, uint256 newSupply);
     error ZeroMint();
 
-    event NewHack(address indexed token);
+    event NewHack(address indexed token, uint256 price, uint256 expiration, address receiver, string metadataUri);
+    event NewToken(address indexed token, string name, string symbol, uint256 totalSupply);
     event Funded(address indexed token);
     event Mint(address indexed token, address to, uint256 amount);
     event Refund(address indexed token, address to, uint256 amount);

@@ -19,6 +19,21 @@ type Mint @entity(immutable: true) {
 type NewHack @entity(immutable: true) {
   id: Bytes!
   token: Bytes! # address
+  price: BigInt! # uint256
+  expiration: BigInt! # uint256
+  receiver: Bytes! # address
+  metadataUri: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewToken @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  name: String! # string
+  symbol: String! # string
+  totalSupply: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

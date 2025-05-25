@@ -1,12 +1,6 @@
 import { newMockEvent } from "matchstick-as"
 import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts"
-import {
-  Funded,
-  Mint,
-  NewHack,
-  NewToken,
-  Refund
-} from "../generated/HackFund/HackFund"
+import { Funded, Mint, NewHack, Refund } from "../generated/HackFund/HackFund"
 
 export function createFundedEvent(token: Address): Funded {
   let fundedEvent = changetype<Funded>(newMockEvent())
@@ -42,13 +36,7 @@ export function createMintEvent(
   return mintEvent
 }
 
-export function createNewHackEvent(
-  token: Address,
-  price: BigInt,
-  expiration: BigInt,
-  receiver: Address,
-  metadataUri: string
-): NewHack {
+export function createNewHackEvent(token: Address): NewHack {
   let newHackEvent = changetype<NewHack>(newMockEvent())
 
   newHackEvent.parameters = new Array()
@@ -56,55 +44,8 @@ export function createNewHackEvent(
   newHackEvent.parameters.push(
     new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
   )
-  newHackEvent.parameters.push(
-    new ethereum.EventParam("price", ethereum.Value.fromUnsignedBigInt(price))
-  )
-  newHackEvent.parameters.push(
-    new ethereum.EventParam(
-      "expiration",
-      ethereum.Value.fromUnsignedBigInt(expiration)
-    )
-  )
-  newHackEvent.parameters.push(
-    new ethereum.EventParam("receiver", ethereum.Value.fromAddress(receiver))
-  )
-  newHackEvent.parameters.push(
-    new ethereum.EventParam(
-      "metadataUri",
-      ethereum.Value.fromString(metadataUri)
-    )
-  )
 
   return newHackEvent
-}
-
-export function createNewTokenEvent(
-  token: Address,
-  name: string,
-  symbol: string,
-  totalSupply: BigInt
-): NewToken {
-  let newTokenEvent = changetype<NewToken>(newMockEvent())
-
-  newTokenEvent.parameters = new Array()
-
-  newTokenEvent.parameters.push(
-    new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
-  )
-  newTokenEvent.parameters.push(
-    new ethereum.EventParam("name", ethereum.Value.fromString(name))
-  )
-  newTokenEvent.parameters.push(
-    new ethereum.EventParam("symbol", ethereum.Value.fromString(symbol))
-  )
-  newTokenEvent.parameters.push(
-    new ethereum.EventParam(
-      "totalSupply",
-      ethereum.Value.fromUnsignedBigInt(totalSupply)
-    )
-  )
-
-  return newTokenEvent
 }
 
 export function createRefundEvent(
