@@ -1,0 +1,35 @@
+type Funded @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Mint @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  to: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewHack @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Refund @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  to: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

@@ -1,0 +1,35 @@
+specVersion: 1.3.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: HackFund
+    network: base-sepolia
+    source:
+      address: "0x677e546e38A5d1d0711962206549FEf7549A220B"
+      abi: HackFund
+      startBlock: 26167505
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Funded
+        - Mint
+        - NewHack
+        - Refund
+      abis:
+        - name: HackFund
+          file: ./abis/HackFund.json
+      eventHandlers:
+        - event: Funded(indexed address)
+          handler: handleFunded
+        - event: Mint(indexed address,address,uint256)
+          handler: handleMint
+        - event: NewHack(indexed address)
+          handler: handleNewHack
+        - event: Refund(indexed address,address,uint256)
+          handler: handleRefund
+      file: ./src/hack-fund.ts
