@@ -6,7 +6,7 @@ export function ConnectButton({
     ...props
 }: React.HTMLAttributes<HTMLElement>) {
     return (
-        <div className='w-40 flex justify-end'>
+        <div className='flex justify-end'>
             <UserPill />
         </div>
     );

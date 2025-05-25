@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: ['nft-cdn.alchemy.com'],
+  },
 };
 
 export default nextConfig;

@@ -1,17 +1,18 @@
-import { Bytes, json, dataSource, log } from "@graphprotocol/graph-ts";
+import { Bytes } from "@graphprotocol/graph-ts";
 import {
 	Mint as MintEvent,
 	NewHack as NewHackEvent,
 	NewToken as NewTokenEvent,
 } from "../generated/HackFund/HackFund"
-import { Token, Hack, HackMetadata } from "../generated/schema";
-import { HackMetadata as HackMetadataTemplate } from '../generated/templates';
+import { Token, Hack } from "../generated/schema";
 
 export function handleNewToken(event: NewTokenEvent): void {
 	let entity = new Token(tokenId(event.params.token));
 
+	entity.address = event.params.token.toHexString();
 	entity.name = event.params.name;
 	entity.symbol = event.params.symbol;
+	entity.initialSupply = event.params.totalSupply;
 	entity.totalSupply = event.params.totalSupply;
 
 	entity.save()
@@ -25,48 +26,8 @@ export function handleNewHack(event: NewHackEvent): void {
 	entity.price = event.params.price;
 	entity.expiration = event.params.expiration;
 	entity.metadataUri = event.params.metadataUri;
-	entity.metadata = Bytes.fromUTF8(event.params.metadataUri);
-
-	log.warning("METADATA_URI: {}", [event.params.metadataUri]);
-	HackMetadataTemplate.create(event.params.metadataUri);
-	log.warning("CREATE", []);
 
 	entity.save();
-}
-
-export function handleHackMetadata(content: Bytes): void {
-	log.warning("CONTENT: {}", [content.toString()]);
-	let metadata = new HackMetadata(Bytes.fromUTF8(dataSource.stringParam()));
-	const value = json.fromBytes(content).toObject();
-	log.warning("VALUE: {}", [json.fromBytes(content).toString()]);
-	if (value) {
-		log.warning("VALUE HIT", []);
-
-		const name = value.get('name');
-		const description = value.get('description');
-		const avatar = value.get('avatar');
-		const banner = value.get('banner');
-		const category = value.get('category');
-		const links = value.get('links');
-		const nfts = value.get('nfts');
-		const signature = value.get('signature');
-
-		if (name && description && avatar && banner && category && links && nfts && signature) {
-			log.warning("PARAMS HIT", []);
-
-			metadata.cid = dataSource.stringParam();
-			metadata.name = name.toString();
-			metadata.description = description.toString();
-			metadata.avatar = avatar.toString();
-			metadata.banner = banner.toString();
-			metadata.category = category.toString();
-			metadata.links = links.toArray().map<string>((link) => link.toString());
-			metadata.nfts = nfts.toArray().map<string>((nft) => nft.toString());
-			metadata.signature = signature.toString();
-		}
-
-		metadata.save();
-	}
 }
 
 export function handleMint(event: MintEvent): void {
@@ -81,7 +42,7 @@ export function handleMint(event: MintEvent): void {
 }
 
 export function tokenId(token: Bytes): Bytes {
-    return token.concat(Bytes.fromUTF8("-token"))
+    return token.concat(Bytes.fromUTF8("-token"));
 }
 
 export function hackId(token: Bytes): Bytes {

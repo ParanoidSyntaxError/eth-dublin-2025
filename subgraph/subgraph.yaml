@@ -29,16 +29,3 @@ dataSources:
         - event: Mint(indexed address,address,uint256)
           handler: handleMint
       file: ./src/hack-fund.ts
-templates:
-  - kind: file/ipfs
-    name: HackMetadata
-    mapping:
-      apiVersion: 0.0.9
-      language: wasm/assemblyscript
-      file: ./src/hack-fund.ts
-      handler: handleHackMetadata
-      entities:
-        - HackMetadata
-      abis:
-        - name: HackFund
-          file: ./abis/HackFund.json

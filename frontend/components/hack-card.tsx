@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 
-interface ProjectCardProps {
+interface HackCardProps {
+    token: string;
     name: string;
     avatar: string;
     banner: string;
@@ -14,9 +15,8 @@ interface ProjectCardProps {
     raisedAmount: number;
     endDate: Date;
     category: string;
-    awards: string[];
 }
-export default function ProjectCard({ name, avatar, banner, targetAmount, raisedAmount, endDate, category, awards }: ProjectCardProps) {
+export default function HackCard({ token, name, avatar, banner, targetAmount, raisedAmount, endDate, category }: HackCardProps) {
     const timeRemaining = () => {
         const now = new Date().getTime()
         const endTime = new Date(endDate).getTime()
@@ -50,28 +50,25 @@ export default function ProjectCard({ name, avatar, banner, targetAmount, raised
 
     const fundingProgress = (raisedAmount / targetAmount) * 100;
 
-    const visibleAwards = awards.slice(0, 3);
-    const awardOverflowCount = awards.length - 3;
-
     return (
         <Link
-            href={`/project/id`}
+            href={`/${token}`}
             className="block w-full max-w-md transition-all duration-200 hover:shadow-lg hover:scale-[1.01] rounded-xl overflow-hidden"
         >
             <Card className="w-full max-w-md">
                 {/* Banner Image */}
                 <div className="relative h-48 bg-gradient-to-r from-blue-500 to-green-500">
                     <Image
-                        src={banner || "/placeholder.svg"}
-                        alt="Project banner"
+                        src="/placeholder.svg"
+                        alt="Hack banner"
                         className="object-cover"
                         fill
                     />
                     {/* Profile Picture Overlay */}
                     <div className="absolute -bottom-8 right-6">
                         <Avatar className="w-20 h-20">
-                            <AvatarImage src={avatar || "/placeholder.svg"} alt={name} />
-                            <AvatarFallback className="text-lg font-semibold">
+                            <AvatarImage src="/placeholder.svg" alt="Hack avatar" className="object-cover"/>
+                            <AvatarFallback className="text-2xl font-semibold">
                                 {name
                                     .split(" ")
                                     .map((n) => n[0])
@@ -103,30 +100,10 @@ export default function ProjectCard({ name, avatar, banner, targetAmount, raised
                     {/* Funding Progress */}
                     <div className="space-y-2 mb-4">
                         <div className="flex justify-between items-center">
-                            <span className="text-green-400">${raisedAmount.toLocaleString()} raised</span>
-                            <span className="text-sm text-muted-foreground">of ${targetAmount.toLocaleString()}</span>
+                            <span className="text-green-400">{raisedAmount.toLocaleString()} ETH raised</span>
+                            <span className="text-sm text-muted-foreground">of {targetAmount.toLocaleString()} ETH</span>
                         </div>
                         <Progress value={fundingProgress} className="h-2" />
-                    </div>
-
-                    {/* Awards Badges */}
-                    <div className="space-y-2">
-                        <div className="flex flex-wrap gap-1">
-                            {visibleAwards.map((award, index) => (
-                                <Badge
-                                    key={index}
-                                    className="text-xs px-2 py-1"
-                                    variant="secondary"
-                                >
-                                    {award}
-                                </Badge>
-                            ))}
-                            {awardOverflowCount > 0 && (
-                                <Badge variant="secondary" className="text-xs px-2 py-1">
-                                    +{awardOverflowCount}
-                                </Badge>
-                            )}
-                        </div>
                     </div>
                 </CardContent>
             </Card>

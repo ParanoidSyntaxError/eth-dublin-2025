@@ -1,29 +1,17 @@
 type Token @entity(immutable: false) {
   id: Bytes!
+  address: String!
   name: String!
   symbol: String!
+  initialSupply: BigInt!
   totalSupply: BigInt!
 }
 
-type Hack @entity(immutable: false) {
+type Hack @entity(immutable: true) {
   id: Bytes!
   token: Token!
   deployer: Bytes!
   price: BigInt!
   expiration: BigInt!
   metadataUri: String!
-  metadata: HackMetadata
-}
-
-type HackMetadata @entity(immutable: false) {
-  id: Bytes!
-  cid: String!
-  name: String!
-  description: String!
-  avatar: String!
-  banner: String!
-  category: String!
-  links: [String!]!
-  nfts: [String!]!
-  signature: String!
 }

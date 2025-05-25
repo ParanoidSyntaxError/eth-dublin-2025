@@ -7,8 +7,8 @@ export function Header() {
         <header className="w-full fixed top-0 left-0 right-0 z-50 backdrop-blur-[2px]">
             <div className="w-full flex h-16 items-center justify-between px-8">
                 {/* Logo/Title */}
-                <div className="flex items-center">
-                    <Link href="/" className="flex items-center space-x-2">
+                <div className="w-40">
+                    <Link href="/" className="flex items-center space-x-2 w-fit">
                         <span className="text-2xl font-semibold">HackFund</span>
                     </Link>
                 </div>
@@ -24,7 +24,7 @@ export function Header() {
                 </nav>
 
                 {/* Connect Button */}
-                <div>
+                <div className="w-40">
                     <ConnectButton />
                 </div>
             </div>
