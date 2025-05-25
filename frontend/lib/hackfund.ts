@@ -127,7 +127,6 @@ export async function newHack(
             ...metadata,
             signature: signature
         });
-        const metadataUrl = await pinata.gateways.public.convert(cid);
 
         const { request } = await hfClient.simulateContract({
             address: HACKFUND_ADDRESS,
@@ -140,7 +139,7 @@ export async function newHack(
                     price: BigInt(price),
                     expiration: BigInt(expiration),
                     receiver: receiver as `0x${string}`,
-                    metadataUri: metadataUrl
+                    metadataUri: cid
                 },
                 BigInt(mintAmount),
                 mintReceiver as `0x${string}`,

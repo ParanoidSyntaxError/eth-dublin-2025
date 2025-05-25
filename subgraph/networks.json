@@ -1,8 +1,8 @@
 {
   "base-sepolia": {
     "HackFund": {
-      "address": "0xDf93B053f90139dC2dFCd9d940587B154CA38c5d",
-      "startBlock": 26193507
+      "address": "0x59006Fb2eA8213630Fa55A95A979E1e1F8C5Df68",
+      "startBlock": 26193720
     }
   }
 }

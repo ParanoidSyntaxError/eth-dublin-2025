@@ -3,7 +3,7 @@ export interface HackMetadata {
     description: string;
     avatar: string;
     banner: string;
-    catagory: string;
+    category: string;
     links: string[];
     nfts: NFT[];
 }

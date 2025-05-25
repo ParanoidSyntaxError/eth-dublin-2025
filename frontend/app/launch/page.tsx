@@ -21,7 +21,7 @@ export default function Launch() {
 				description: "This is a test hack",
 				avatar: "undefined",
 				banner: "undefined",
-				catagory: "DeFi",
+				category: "DeFi",
 				links: [],
 				nfts: []
 			};
