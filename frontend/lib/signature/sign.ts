@@ -11,7 +11,7 @@ export function sign(message: string): string | undefined {
             new TextEncoder().encode(message),
             bs58.decode(PRIVATE_KEY)
         ));
-    } catch (error) {
+    } catch {
         return undefined;
     }
 }

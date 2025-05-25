@@ -28,7 +28,7 @@ interface FundFormProps {
     metadata: HackMetadata;
 }
 
-export default function FundForm({ hack, metadata }: FundFormProps) {
+export default function FundForm({ hack }: FundFormProps) {
     const [isBackingExpanded, setIsBackingExpanded] = useState(false);
     const [isTokenDropdownOpen, setIsTokenDropdownOpen] = useState(false);
 

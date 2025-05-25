@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import Image from "next/image"
 import ReactMarkdown from 'react-markdown'
-import Link from "next/link"
 import FundForm from "@/components/fund-form";
 import { getHackByToken } from "@/lib/subgraph";
 import { fetchHackMetadata } from "@/lib/ipfs"

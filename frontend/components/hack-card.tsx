@@ -16,7 +16,7 @@ interface HackCardProps {
     endDate: Date;
     category: string;
 }
-export default function HackCard({ token, name, avatar, banner, targetAmount, raisedAmount, endDate, category }: HackCardProps) {
+export default function HackCard({ token, name, targetAmount, raisedAmount, endDate, category }: HackCardProps) {
     const timeRemaining = () => {
         const now = new Date().getTime()
         const endTime = new Date(endDate).getTime()

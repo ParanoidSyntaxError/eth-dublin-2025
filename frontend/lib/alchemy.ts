@@ -1,6 +1,6 @@
 "use server";
 
-import { Network, Alchemy, Nft, NftMetadata } from "alchemy-sdk";
+import { Network, Alchemy, Nft } from "alchemy-sdk";
 import { NFT } from "./schema";
 
 const alchemyOptimism = new Alchemy({

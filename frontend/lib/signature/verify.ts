@@ -10,7 +10,7 @@ export function verfiy(signature: string, message: string): boolean {
             bs58.decode(signature),
             bs58.decode(PUBLIC_KEY)
         );
-    } catch (error) {
+    } catch {
         return false;
     }
 }

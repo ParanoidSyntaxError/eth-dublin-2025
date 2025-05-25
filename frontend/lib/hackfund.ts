@@ -1,7 +1,7 @@
 "use server";
 
 import { HackMetadata } from "./schema";
-import { keccak256, PublicClient, recoverMessageAddress, recoverTypedDataAddress } from "viem";
+import { keccak256, PublicClient } from "viem";
 import { HackFundAbi } from "@/abi";
 import { createPublicClient, createWalletClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -15,6 +15,7 @@ const PRIVATE_KEY = process.env.SERVER_WALLET_PRIVATE_KEY as `0x${string}`;
 
 const MESSAGE = process.env.NEXT_PUBLIC_SIGNED_MESSAGE;
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const clients = new Map<string, any>([
     // HackFund contracts
     [baseSepolia.id.toString(), createPublicClient({
